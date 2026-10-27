@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="stage"></div>
+  <button id="btn">play</button>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const btn = document.getElementById("btn");
+    const sleep = s => new Promise(r => setTimeout(r, s * 1000));
+
+    async function typeLine(text, delay) {
+      for (const ch of text) {
+        stage.innerHTML += ch;
+        await sleep(delay);
+      }
+    }
+
+    const lines = [
+      ["អូនសប្បាយចិត្តឬទេ?", 0.06],
+      ["ពេលដែលអូនបោះបង់បង", 0.05],
+      ["អូនបំពេញតាមបំណង់", 0.03],
+      ["ទាំងអោយបងត្រូវសៅហ្មង", 0.03],
+      ["បងស្រែកហៅអូនមិនលឺ", 0.04],
+      ["ប្រើពាក្យពេច៍មកបញ្ឈឺ", 0.05],
+      ["ទុកបងជា toy មែនឬ?", 0.05],
+      ["ដឹងទេថាបងសែនឈឺ", 0.1],
+      ["មានចាំបានទេ?", 0.05],
+      ["កាលពួកយើងនៅជាមូយគ្នា", 0.05],
+      ["ដៃបងអោបអូន មិនអោយមានភាពរងា", 0.1],
+      ["ទោះជាមានរឿងអ្វី", 0.06],
+      ["បងនិងប្តេជ្ញាចិត្តការពារ", 0.06],
+      ["តែឥឡូវអូនប្រែទុកឪ្យបងនៅកំព្រា...", 0.1],
+    ];
+    const delays = [0.8, 0.8, 1.5];
+
+    async function play() {
+      stage.innerHTML = "";
+      for (let i = 0; i < lines.length; i++) {
+        const [text, d] = lines[i];
+        await typeLine(text, d);
+        stage.innerHTML += "<br>";
+        await sleep(delays[i]);
+      }
+    }
+
+    btn.addEventListener("click", play);
+    play();
+  </script>
+
+  <style>
+    body { background: #020202; color: #4bc4d4;
+           font-family: monospace; font-size: 24px;
+           padding: 40px; }
+  </style>
+</body>
+</html>
